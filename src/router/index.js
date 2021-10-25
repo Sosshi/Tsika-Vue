@@ -12,7 +12,7 @@ const routes = [
     name: "Login",
     component: () => import("../views/authentification/Login.vue")
   }, {
-    path: "/search",
+    path: "/search/:products",
     name: "Search",
     component: () => import("../views/customer/Search.vue")
   },

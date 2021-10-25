@@ -49,19 +49,18 @@
                   {{ product.description }}
                 </p>
                 <div class="buttons">
-                  <a href="#" class="btn wishlist-btn"
+                  <a class="btn wishlist-btn"
                     ><i class="fa fa-heart" aria-hidden="true"></i
                   ></a>
                   <button
-                    :disabled="this.$store.getters.isExist(product.id)"
+                    v-if="!this.$store.getters.isExist(product.id)"
                     @click="addToCart(product)"
-                    href="#"
                     class="btn add-to-cart-btn"
                   >
                     <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add
                     to cart
                   </button>
-                  <a href="#" class="btn compare-btn"
+                  <a class="btn compare-btn"
                     ><i class="fa fa-random" aria-hidden="true"></i
                   ></a>
                 </div>
@@ -88,13 +87,9 @@ export default {
     addToCart(item) {
       item.quantity = 1;
       this.$store.commit("addProductToCart", item);
-      console.log(item);
+      this.$toast.success(`Product added to Cart`);
     },
   },
 };
 </script>
-  
-  <!-- Add "scoped" attribute to limit CSS to this component only -->
-  <style scoped>
-</style>
   

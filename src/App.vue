@@ -79,12 +79,7 @@
                   ><i class="biolife-icon icon-search"></i
                 ></a>
                 <div class="mobile-search-content">
-                  <form
-                    action="#"
-                    class="form-search"
-                    name="mobile-seacrh"
-                    method="get"
-                  >
+                  <form class="form-search" name="mobile-seacrh">
                     <a href="#" class="btn-close"
                       ><span class="biolife-icon icon-close-menu"></span
                     ></a>
@@ -92,22 +87,12 @@
                       type="text"
                       name="s"
                       class="input-text"
-                      value=""
+                      v-model="item"
                       placeholder="Search here..."
                     />
-                    <select name="category">
-                      <option value="-1" selected>All Categories</option>
-                      <option value="vegetables">Vegetables</option>
-                      <option value="fresh_berries">Fresh Berries</option>
-                      <option value="ocean_foods">Ocean Foods</option>
-                      <option value="butter_eggs">Butter & Eggs</option>
-                      <option value="fastfood">Fastfood</option>
-                      <option value="fresh_meat">Fresh Meat</option>
-                      <option value="fresh_onion">Fresh Onion</option>
-                      <option value="papaya_crisps">Papaya & Crisps</option>
-                      <option value="oatmeal">Oatmeal</option>
-                    </select>
-                    <button type="submit" class="btn-submit">go</button>
+                    <button type="button" class="btn-submit" @click="search">
+                      go
+                    </button>
                   </form>
                 </div>
               </div>
@@ -791,17 +776,12 @@
           </div>
           <div class="col-lg-9 col-md-8 padding-top-2px">
             <div class="header-search-bar layout-01">
-              <form
-                action="#"
-                class="form-search"
-                name="desktop-seacrh"
-                method="get"
-              >
+              <form class="form-search" name="desktop-seacrh">
                 <input
                   type="text"
                   name="s"
                   class="input-text"
-                  value=""
+                  v-model="item"
                   placeholder="Search here..."
                 />
                 <select name="category">
@@ -816,7 +796,7 @@
                   <option value="papaya_crisps">Papaya & Crisps</option>
                   <option value="oatmeal">Oatmeal</option>
                 </select>
-                <button type="submit" class="btn-submit">
+                <button type="button" class="btn-submit" @click="search">
                   <i class="biolife-icon icon-search"></i>
                 </button>
               </form>
@@ -965,7 +945,15 @@
 <script>
 export default {
   name: "App",
+  data() {
+    return {
+      item: null,
+    };
+  },
   methods: {
+    search() {
+      this.$router.push("/search/" + this.item);
+    },
     checkout() {
       if (this.$store.state.token) {
         this.$router.push("/checkout");
